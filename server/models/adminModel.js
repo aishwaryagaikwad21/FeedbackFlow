@@ -49,7 +49,9 @@ const adminSchema = new Schema({
             required: true
         }
     }]
-})
+},
+{ timestamps: true }
+)
 
 adminSchema.methods.generateAuthToken = async function(){
     const user = this
