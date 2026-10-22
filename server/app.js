@@ -3,6 +3,7 @@ import cors from 'cors'
 
 //import routers
 import adminRouter from './routes/adminRouter.js'
+import feedbackRouter from './routes/feedbackRouter.js'
 
 const app = express()
 
@@ -18,5 +19,6 @@ app.use(cors({
 app.use(express.json())
 
 app.use('/admin/auth',adminRouter)
+app.use('/feedbackFlow', feedbackRouter)
 
 export default app
