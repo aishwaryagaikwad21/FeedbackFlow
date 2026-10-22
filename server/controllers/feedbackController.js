@@ -16,9 +16,10 @@ export const writeFeedback = async (req, res) => {
 
     try{
 
-        const {email, category, feedback, rating} = result.data
+        const {name, email, category, feedback, rating} = result.data
 
         const storeFeedback = new Feedback({
+            name,
             email,
             category, 
             feedback,
@@ -45,4 +46,8 @@ export const writeFeedback = async (req, res) => {
             error: err
         })
     }
+}
+
+export const getAllFeedbacks = async (req, res) => {
+
 }
