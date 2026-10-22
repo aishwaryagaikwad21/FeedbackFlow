@@ -49,5 +49,20 @@ export const writeFeedback = async (req, res) => {
 }
 
 export const getAllFeedbacks = async (req, res) => {
+    try {
+        const feedbacks = await Feedback.find()
+            .select("-_id name category feedback rating createdAt")
+            .sort({ createdAt: -1 });
 
-}
+        return res.status(200).json({
+            count: feedbacks.length,
+            feedbacks
+        });
+    } catch (err) {
+        console.error("Error fetching feedback:", err);
+
+        return res.status(500).json({
+            message: "Failed to retrieve feedback"
+        });
+    }
+};
