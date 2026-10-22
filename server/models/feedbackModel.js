@@ -25,11 +25,6 @@ const feedbackSchema = new mongoose.Schema({
         min: 1,
         max: 5
     },
-    feedbackCode:{
-        type: String,
-        unique: true,
-        immutable: true
-    }
 },
 {timestamps: true}
 )
