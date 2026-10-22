@@ -66,3 +66,25 @@ export const getAllFeedbacks = async (req, res) => {
         });
     }
 };
+
+export const getFeedbackByCategory = async (req, res) => {
+    try{
+        const category = req.params.category
+
+        const feedbacksCollection = await Feedback.find({category}).select("-_id name category feedback rating createdAt")
+
+        if(!feedbacksCollection){
+            return res.status(404).json({
+                message: 'Not Found'
+            })
+        }
+
+        return res.status(200).json({
+            feedbacksCollection
+        })
+    }
+    catch(err){
+        console.log('Error Occurred', err)
+        return res.status(500).send('Error Occurred')
+    }
+}
