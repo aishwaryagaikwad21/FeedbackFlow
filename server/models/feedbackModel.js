@@ -12,7 +12,8 @@ const feedbackSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        lowercase: true
+        lowercase: true,
+        unique: true
     },
     category:{
         type: String,
@@ -32,6 +33,10 @@ const feedbackSchema = new mongoose.Schema({
         min: 1,
         max: 5
     },
+    editTokenHash: {
+        type: String,
+        select: false
+    }
 },
 {timestamps: true}
 )

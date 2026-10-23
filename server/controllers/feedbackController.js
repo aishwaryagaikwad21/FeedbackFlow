@@ -1,7 +1,6 @@
 import Feedback from "../models/feedbackModel.js";
-import FeedbackCode from "../models/feedbackCode.js";
 import { feedbackValidation } from "../validators/feedbackValidator.js";
-import { generateShortFeedbackCode } from "../services/feedbackCodeService.js";
+import { randomBytes, createHash, timingSafeEqual } from "node:crypto";
 
 export const writeFeedback = async (req, res) => {
 
@@ -18,29 +17,28 @@ export const writeFeedback = async (req, res) => {
 
         const {name, email, category, feedback, rating} = result.data
 
+        const editToken = randomBytes(32).toString("hex");
+        const editTokenHash = createHash("sha256").update(editToken).digest("hex")
+
         const storeFeedback = new Feedback({
             name,
             email,
             category, 
             feedback,
-            rating
+            rating,
+            editTokenHash
         })
         const saveFeedback = await storeFeedback.save()
-        
-        //Generate a short feedback code
-        const shortCode = await generateShortFeedbackCode()
 
-        const storeShortCode = new FeedbackCode({
-            feedbackCode: shortCode,
-            feedbackId: saveFeedback._id
+        return res.status(201).json({
+            message: "Feedback submitted successfully",
+            feedbackId: saveFeedback._id,
+            editToken
         })
-
-        const saveShortCode = await storeShortCode.save()
-
-        return res.status(201).json({saveFeedback, saveShortCode})
         
     }
     catch(err){
+        console.log(err)
         res.status(500).send({
             message: 'Error Occurred',
             error: err
@@ -87,4 +85,24 @@ export const getFeedbackByCategory = async (req, res) => {
         console.log('Error Occurred', err)
         return res.status(500).send('Error Occurred')
     }
+}
+
+export const getFeedbackByemailId = async (req, res) => {
+    const mail = req.params.email
+    try{
+        const feedbacks = await Feedback.find({email: mail})
+
+        if(!feedbacks){
+            return res.status(404).json({message: "No feedbacks found"})
+        }
+
+        return res.status(200).json({feedbacks})
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json({
+            message: 'Error occurred'
+        })
+    }
+
 }
