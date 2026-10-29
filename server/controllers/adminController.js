@@ -1,4 +1,5 @@
 import { Admin } from "../models/adminModel.js";
+import Feedback from "../models/feedbackModel.js";
 
 import { 
     adminRegistrationValidation, 
@@ -79,3 +80,30 @@ export const loginAdmin = async (req, res) => {
         })
     }
 } 
+
+export const deleteFeedbackByAdmin = async (req, res) => {
+    const  feedbackId  = req.params.id;
+
+    try {
+        const feedback = await Feedback.findById({_id: feedbackId});
+
+        if (!feedback) {
+            return res.status(404).json({
+                message: "Feedback not found"
+            });
+        }
+
+        await feedback.deleteOne();
+
+        return res.status(200).json({
+            message: "Feedback deleted successfully",
+            feedbackId: feedback._id
+        });
+    } catch (err) {
+        console.error(err);
+
+        return res.status(500).json({
+            message: "Failed to delete feedback"
+        });
+    }
+};
