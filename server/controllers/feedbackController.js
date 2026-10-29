@@ -87,22 +87,38 @@ export const getFeedbackByCategory = async (req, res) => {
     }
 }
 
-export const getFeedbackByemailId = async (req, res) => {
+export const getFeedbacksByEmail = async (req, res) => {
+    
     const mail = req.params.email
-    try{
-        const feedbacks = await Feedback.find({email: mail})
 
-        if(!feedbacks){
-            return res.status(404).json({message: "No feedbacks found"})
+    if (!mail) {
+        return res.status(400).json({
+            message: "Email is required"
+        });
+    }
+
+    try {
+        const feedbacks = await Feedback.find({
+            email: mail
+        })
+        .select("-editTokenHash")
+
+        if(feedbacks.length === 0){
+            return res.status(404).json({
+                message: 'No feedback found'
+            })
         }
 
-        return res.status(200).json({feedbacks})
-    }
-    catch(err){
-        console.log(err)
-        return res.status(500).json({
-            message: 'Error occurred'
-        })
-    }
+        return res.status(200).json({
+            count: feedbacks.length,
+            feedbacks
+        });
 
-}
+    } catch (err) {
+        console.error("Error fetching feedbacks by email:", err);
+
+        return res.status(500).json({
+            message: "Failed to retrieve feedbacks"
+        });
+    }
+};
