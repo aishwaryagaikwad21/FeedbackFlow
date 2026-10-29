@@ -6,7 +6,7 @@ import {
     getFeedbackByemailId
 } from '../controllers/feedbackController.js'
 
-import { deleteFeedback } from '../controllers/feedbackUpdateDelete.js'
+import { deleteFeedback, updateFeedback } from '../controllers/feedbackUpdateDelete.js'
 
 const router = new express.Router()
 
@@ -15,5 +15,6 @@ router.get('/allFeedbacks', getAllFeedbacks)
 router.get('/feedback/:category', getFeedbackByCategory)
 router.get('/email/:email', getFeedbackByemailId)
 router.delete('/delete/:feedbackId', deleteFeedback)
+router.patch('/update/:feedbackId', updateFeedback)
 
 export default router
