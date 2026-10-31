@@ -5,11 +5,13 @@ import {
     loginAdmin,
     deleteFeedbackByAdmin
 } from '../controllers/adminController.js'
+import { getAdminStatistics } from '../controllers/dashboardController.js'
 
 const router = express.Router()
 
 router.post('/register', registerAdmin)
 router.post('/login', loginAdmin)
 router.delete('/delete/:id', auth, deleteFeedbackByAdmin)
+router.get('/statistics/categorywise', auth, getAdminStatistics)
 
 export default router
