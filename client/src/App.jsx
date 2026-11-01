@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import WriteFeedback from "./pages/WriteFeedback";
 import FeedbackListing from "./pages/FeedbackListing";
 import EditFeedback from "./pages/EditFeedback";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
     return (
@@ -40,8 +41,8 @@ const App = () => {
                 </Route>
             </Route>
 
-                {/* Fallback */}
-                <Route path="*" element={<Navigate to="/" replace />} />
+                {/* Not Found */}
+                <Route path="*" element={<NotFound />} />
 
             </Routes>
         </BrowserRouter>
