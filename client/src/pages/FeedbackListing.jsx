@@ -1,6 +1,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import api from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   "all",
@@ -16,6 +17,8 @@ const categories = [
 ];
 
 const FeedbackListing = () => {
+
+    const navigate = useNavigate();
   const [feedbacks, setFeedbacks] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -318,7 +321,14 @@ const FeedbackListing = () => {
 
                       {/* Ownership indicator */}
                       {isOwnFeedback && (
-                        <div className="mt-5 flex justify-end border-t border-gray-100 pt-4">
+                        <div className="mt-5 flex justify-end gap-3 border-t border-gray-100 pt-4">
+                            <button
+                            onClick={() => navigate(`/edit-feedback/${item._id}`)}
+                            className="rounded-lg border border-purple-200 px-4 py-2 text-sm font-medium text-purple-600 transition hover:bg-purple-50"
+                            >
+                            Edit
+                            </button>
+
                             <button
                             onClick={() => handleDelete(item._id)}
                             className="rounded-lg border border-red-200 px-4 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50"

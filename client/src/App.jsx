@@ -16,6 +16,7 @@ import FeedbackManagement from "./pages/FeedbackManagement";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import WriteFeedback from "./pages/WriteFeedback";
 import FeedbackListing from "./pages/FeedbackListing";
+import EditFeedback from "./pages/EditFeedback";
 
 const App = () => {
     return (
@@ -27,6 +28,7 @@ const App = () => {
                     <Route path="/" element={<Landing />} />
                     <Route path="/write-feedback" element={<WriteFeedback />} />
                     <Route path="/all-feedbacks" element={<FeedbackListing />} />
+                    <Route path="/edit-feedback/:feedbackId" element={<EditFeedback />} />
                 </Route>
 
              <Route path="/register" element={<Register />} />
