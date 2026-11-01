@@ -50,6 +50,14 @@ const Landing = () => {
                                 <ArrowRight size={19} />
                             </Link>
 
+                            <Link
+                                to="/all-feedbacks"
+                                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-7 py-4 font-semibold text-slate-200 transition hover:bg-slate-800"
+                            >
+                                View All Feedback
+                                <MessageSquareText size={19} />
+                            </Link>
+
                             <a
                                 href="#why-feedback"
                                 className="inline-flex items-center justify-center rounded-xl border border-slate-700 px-7 py-4 font-semibold text-slate-200 transition hover:bg-slate-800"
@@ -57,7 +65,7 @@ const Landing = () => {
                                 Learn More
                             </a>
 
-                        </div>
+                    </div>
 
                     </div>
 
