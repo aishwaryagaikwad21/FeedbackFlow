@@ -14,6 +14,7 @@ import Login from './pages/Login'
 import Dashboard from "./pages/Dashboard";
 import FeedbackManagement from "./pages/FeedbackManagement";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import WriteFeedback from "./pages/WriteFeedback";
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
                 {/* Public Layout */}
                 <Route element={<PublicLayout />}>
                     <Route path="/" element={<Landing />} />
+                    <Route path="/write-feedback" element={<WriteFeedback />} />
                 </Route>
 
              <Route path="/register" element={<Register />} />
