@@ -48,9 +48,7 @@ export const writeFeedback = async (req, res) => {
 
 export const getAllFeedbacks = async (req, res) => {
     try {
-        const feedbacks = await Feedback.find()
-            .select("-_id name category feedback rating createdAt")
-            .sort({ createdAt: -1 });
+        const feedbacks = await Feedback.find().sort({ createdAt: -1 });
 
         return res.status(200).json({
             count: feedbacks.length,
