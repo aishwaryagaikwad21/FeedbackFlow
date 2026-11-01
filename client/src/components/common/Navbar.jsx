@@ -44,6 +44,10 @@ const Navbar = () => {
           <NavLink to="/write-feedback" className={navLinkClass}>
             Write Feedback
           </NavLink>
+
+          <NavLink to="/all-feedbacks" className={navLinkClass}>
+            Read All Feedbacks
+          </NavLink>
         </div>
 
         {/* Desktop CTA */}
@@ -94,6 +98,14 @@ const Navbar = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Write Feedback
+            </NavLink>
+
+            <NavLink
+              to="/all-feedbacks"
+              className={navLinkClass}
+              onClick={() => setIsMenuOpen(false)}
+            >
+             Read All Feedbacks
             </NavLink>
 
             <Link
