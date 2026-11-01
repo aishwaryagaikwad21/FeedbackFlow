@@ -12,6 +12,6 @@ const router = express.Router()
 router.post('/register', registerAdmin)
 router.post('/login', loginAdmin)
 router.delete('/delete/:id', auth, deleteFeedbackByAdmin)
-router.get('/statistics/categorywise', auth, getAdminStatistics)
+router.get('/statistics', auth, getAdminStatistics)
 
 export default router
