@@ -75,7 +75,7 @@ adminSchema.pre('save', async function(next){
 
 adminSchema.statics.findByCredentials = async function(email, password){
     const findAdmin = await Admin.findOne({email})
-    if(!email){
+    if(!findAdmin){
         throw new Error('Not Found')
     }
 
