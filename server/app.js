@@ -9,12 +9,14 @@ const app = express()
 
 const allowedOrigins = [
     'http://localhost:5173',
-    'process.env.FRONTEND_URI'
+    'https://courageous-jelly-996b0d.netlify.app'
 ]
 
+console.log('Allowed origins:', allowedOrigins)
+
 app.use(cors({
-  origin: allowedOrigins
-})); 
+    origin: allowedOrigins
+}))
 
 app.use(express.json())
 
