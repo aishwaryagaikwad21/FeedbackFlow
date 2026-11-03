@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 const Dashboard = () => {
+    const navigate = useNavigate();
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -131,8 +132,6 @@ const Dashboard = () => {
         ...stats.ratingsDistribution.map(item => item.ratingCount),
         1
     );
-
-    const navigate = useNavigate();
 
     const handleLogout = async () => {
         try {
