@@ -1,2 +1,6 @@
 server/node_modules
 cmd
+.env
+.env.*
+!.env.example
+dist/
