@@ -11,6 +11,7 @@ import {
     BarChart3
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 const Dashboard = () => {
@@ -131,6 +132,19 @@ const Dashboard = () => {
         1
     );
 
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        try {
+            await api.post("/admin/auth/logout");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        } finally {
+            sessionStorage.removeItem("adminToken");
+            navigate("/login", { replace: true });
+        }
+    };
+
     return (
         <main className="min-h-screen bg-slate-100 p-5 sm:p-8">
 
@@ -159,6 +173,13 @@ const Dashboard = () => {
                     >
                         <RefreshCw size={16} />
                         Refresh
+                    </button>
+
+                    <button
+                        onClick={handleLogout}
+                        className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition"
+                    >
+                        Logout
                     </button>
 
                 </div>
