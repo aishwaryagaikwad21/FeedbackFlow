@@ -107,3 +107,24 @@ export const deleteFeedbackByAdmin = async (req, res) => {
         });
     }
 };
+
+export const logoutAdmin = async (req, res) => {
+    try {
+        req.admin.tokens = req.admin.tokens.filter(
+            (tokenObject) => tokenObject.token !== req.token
+        );
+
+        await req.admin.save();
+
+        return res.status(200).json({
+            message: "Logged out successfully"
+        });
+    }
+    catch (err) {
+        console.error("Admin logout error:", err);
+
+        return res.status(500).json({
+            message: "Failed to logout"
+        });
+    }
+};
